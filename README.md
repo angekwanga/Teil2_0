@@ -1,93 +1,81 @@
 # Übung 2
 
+Nachdem Sie die Daten zum Streckennetz im GTFS-Format verarbeiten können wollen wir diese in einer graphischen Anwendung den Nutzerinnen und Nutzern zur Verfügung stellen.
+Mit dieser Übung implementieren Sie eine eigene graphische Anwendung mit Qt, erstellen im GUI-Builder des Qt-Creator das Layout, verwenden Slots um auf Nutzereingaben zu reagieren und implementieren einen einfachen Such-Algorithmus um Haltestellen im Streckennetz zu finden.
+
+Sie benötigen dabei Ihre Ergebnisse aus Übung 1 um mit den Daten des Streckennetz weiter zu arbeiten und die vorhandenen Klassen zu erweitern.
+
+## Haltestellen suchen
+
+Alle Haltestellen sind in der Datei `stops.txt` definiert und in Ihrer Klasse Network nach der Umsetzung aus Übung 1 im Attribut `stops` gespeichert.
+
+Es ist guter Programmierstil, stets die graphische Oberfläche (den sog. **View**) von Klassen zur Verarbeitung der Daten (dem sog. **Model**) zu trennen. Deswegen implementieren Sie die Funktionalität für die Suche nach Haltestelle in der `Network`-Klasse.
+
+- Richten Sie wieder einen Fork für Übung 2 ein und klonen Sie das Repository auf Ihren Rechner.
+- Kopieren Sie Ihre `Network`-Klasse, die `types.h` und alle weiteren benötigten Dateien in ihr Projekt.
+- Erweitern Sie die Klasse `Network` um eine Methode `search` mit der Sichtbarkeit public, welche einen `std::string` als Parameter übergeben bekommt und einen `std::vector<Stop>` zurückgibt.
+- Implementieren Sie die Methode
+  - Übergeben wird ein Suchwort (z.B. "Hauptbahnhof") und als Ergebnis wird ein Vector mit allen Haltestellen zurückgegeben, welche das Wort "Hauptbahnhof" im Namen besitzen.
+  - **Freiwillig:** Verbessern Sie die Suche in dem bspw. auch andere Felder einer Haltestelle durchsucht werden oder die suche unabhängig von Groß- und Kleinschreibung funktioniert.
+
+## Qt-Anwendung
+
+Verwenden Sie den Qt-Creator um eine graphische Anwendung zu erstellen. Achten Sie darauf, dass Sie alle Ihre bisherigen Quellcode-Dateien zum Qt-Projekt hinzufügen, damit diese beim Übersetzungsvorgang mit qmake auch berücksichtigt werden.
+
+Erstellen Sie nun mit dem GUI-Builder im Qt-Creator ein Fenster, welches mindestens die folgenden Anforderungen erfüllt:
+
+- Ein Texteingabefeld, in dem Anwenderinnen und Anwender einen Suchbegriff eingeben können.
+- Ein Label, welches das Texteingabefeld beschriftet.
+- Eine Liste, in der die Suchergebnisse angezeigt werden.
+
+Dokumentation zu Qt:
+- https://doc.qt.io/archives/qt-4.8/index.html
+- zum Qt-Creator: https://wiki.qt.io/QtCreatorWhitepaper
+  - Texteingabefelder: https://doc.qt.io/archives/qt-4.8/qplaintextedit.html
+  - Labels: https://doc.qt.io/archives/qt-4.8/qlabel.html
+  - Listen
+    - https://doc.qt.io/archives/qt-4.8/qlistview.html, 
+    - deren Model um Daten anzuzeigen: https://doc.qt.io/archives/qt-4.8/qstringlistmodel.html 
+    - und die Qt-Klasse für eine Liste von String: https://doc.qt.io/archives/qt-4.8/qstringlistmodel.html
+    - Tutorial für Qt-Listen und Datenanzeige: https://www.bogotobogo.com/Qt/Qt5_QListView_QStringListModel_ModelView_MVC.php
+- Datentyp QString: https://doc.qt.io/archives/qt-4.8/qstring.html
+
+## Implementierung der Suche
+
+Wenn Sie im GUI-Builder mit der Gestaltung Ihres Fensters fertig sind müssen nun noch Ihr Model (die Klasse `Network`) und Ihr View (das Fenster) zusammengebracht werden.
+
+- Erweitern Sie die Klasse des Fenstern um ein Attribut, welches vom Typ `Network` ist.
+- Erzeugen Sie beim Starten der Anwendung eine Instanz Ihrer Klasse `Network` und weisen Sie diese dem angelegten Attribut zu.
+
+Anschließend müssen Sie auf Texteingaben reagieren, die Suche in Ihrem `Network` durchführen und das Ergebnis in der Liste anzeigen.
+
+- Implementieren Sie eine Methode für einen Slot für das Signal `textChanged` (https://doc.qt.io/qt-6/qplaintextedit.html#textChanged) Ihres Eingabefeldes:
+  - Lesen Sie den Text des Eingabefelds aus (https://doc.qt.io/qt-6/qplaintextedit.html#plainText-prop) 
+  - Suchen Sie nach passenden Haltestellen mit Ihrer `search`-Methode
+  - Zeigen Sie die Ergebnisse in der Liste an
+
+Hinweise zur Verwendung von Signalen und Slots in Qt finden Sie hier:
+  - Mit GUI-Builder: https://www.youtube.com/watch?v=P_uYKl5RPTk
+  - Variante ohne den GUI-Builder: https://www.youtube.com/watch?v=JakMj5XEBoc
+
+## Makefiles
+Für die Abgabe Ihrer Anwendung ist wieder ein `Makefile` erforderlich.
+1. Erzeugen Sie für Ihre Quellcode-Dateien ein `Makefile`.
+1. Fügen Sie ein Target mit dem Namen `autotest` hinzu, welches Ihre Quellcode-Dateien kompiliert für die Tests der automatischen Abgabe. Verwenden Sie als Kompilier-Befehl für das Target folgendes Kommando (setzen Sie für `<Ihre CPP-Dateien>` ihre Quellcode-Dateien ein, welche kompiliert werden müssen um die `search`-Methode der `Network`-Klasse aufzurufen - bitte beachten Sie, dass keine main()-Funktion in diesen Dateien vorhanden sein darf. Strukturieren Sie Ihre Anwendung entsprechend.):
 
 
-## Getting started
-
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
-
+```bash 
+g++ -I. -I/usr/local/include -std=c++17 -o /repo/test_runner /tester.cpp /usr/local/lib/libgtest_main.a /usr/local/lib/libgtest.a <Ihre CPP-Dateien...>
 ```
-cd existing_repo
-git remote add origin https://gitlab.bht-berlin.de/sose-2025-ti-b15/uebung-2.git
-git branch -M main
-git push -uf origin main
-```
 
-## Integrate with your tools
+## Abgabe und automatische Auswertung
+Die automatische Auswertung prüft Ihre `search`-Methode. Außerdem wird Ihre grafische Oberfläche mit automatisierten Tests geprüft. Dazu wird die Anwendung mit `qmake` erstellt und ausgeführt. 
 
-- [ ] [Set up project integrations](https://gitlab.bht-berlin.de/sose-2025-ti-b15/uebung-2/-/settings/integrations)
+Die folgenden Anforderungen werden in der Abgabe geprüft:
+1. Die Anwendungen kann übersetzt werden mit qmake.
+1. Die Kompilierung der Tests mit Ihrem Makefile und dem Target autotests ist möglich.
+1. Die Unit-Tests können ohne Fehler ausgeführt werden.
+1. Eine Plagiatsprüfung findet keine Treffer.
 
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+## Freiwillig: Erweitern Sie die Oberfläche
+Mit Ihrer Oberfläche werden Sie auch in kommenden Übungen weiter arbeiten und diese stetig ausbauen. Erweitern Sie gerne Ihre Abgabe um zusätzliche Felder und probieren Sie andere GUI-Elemente aus.
