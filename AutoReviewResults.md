@@ -1,9 +1,9 @@
-BEWERTUNG: 80
+BEWERTUNG: 100
 
 # Auswertung der Abgabe
 
 - Status: Abgabe wurde bewertet
-- Punkte: **80** von **100**
+- Punkte: **100** von **100**
 
 ## Test 1
 
@@ -11,7 +11,7 @@ BEWERTUNG: 80
 - Beschreibung: Das erforderliche Makefile muss vorhanden sein.
 - Status: ausgeführt
 - Erfolgreich: **Ja**
-- Laufzeit: 0:00:00.000029
+- Laufzeit: 0:00:00.000105
 ##### Testschritte
 - Makefile soll vorhanden sein: OK
 - types.h soll vorhanden sein: OK
@@ -23,7 +23,7 @@ BEWERTUNG: 80
 - Beschreibung: Eine Projektdatei für das Qt-Projekt zum Erstellen mit `qmake` ist vorhanden.
 - Status: ausgeführt
 - Erfolgreich: **Ja**
-- Laufzeit: 0:00:00.000320
+- Laufzeit: 0:00:00.000327
 - Punkte: **16**
 ##### Testschritte
 - Für ./**/*.pro wurde ./project.pro gefunden: OK
@@ -34,7 +34,7 @@ BEWERTUNG: 80
 - Beschreibung: Das Makefile besitzt ein Target zum Kompilieren der Tests.
 - Status: ausgeführt
 - Erfolgreich: **Ja**
-- Laufzeit: 0:00:00.000115
+- Laufzeit: 0:00:00.000142
 - Punkte: **16**
 ##### Testschritte
 - Inhalt von Makefile prüfen: OK
@@ -45,7 +45,7 @@ BEWERTUNG: 80
 - Beschreibung: Mit dem Befehl `make autotest` können die Tests kompiliert werden.
 - Status: ausgeführt
 - Erfolgreich: **Ja**
-- Laufzeit: 0:00:02.667643
+- Laufzeit: 0:00:02.714754
 - Punkte: **16**
 - Return-Code / Fehlercode: `0`
 - Kommandozeile: `make autotest`
@@ -63,7 +63,7 @@ BEWERTUNG: 80
 - Beschreibung: Die Anwendung wird mit Unit-Tests kompiliert und erzeugt die geforderte Datei `/repo/test_runner`.
 - Status: ausgeführt
 - Erfolgreich: **Ja**
-- Laufzeit: 0:00:00.000018
+- Laufzeit: 0:00:00.000020
 ##### Testschritte
 - test_runner soll vorhanden sein: OK
 
@@ -73,7 +73,7 @@ BEWERTUNG: 80
 - Beschreibung: Die geforderte Datei `/repo/test_runner` enthält die `tester.cpp`-Datei.
 - Status: ausgeführt
 - Erfolgreich: **Ja**
-- Laufzeit: 0:00:00.208525
+- Laufzeit: 0:00:00.201525
 - Return-Code / Fehlercode: `0`
 - Kommandozeile: `readelf -s --wide /repo/test_runner`
 ##### Testschritte
@@ -91,7 +91,7 @@ BEWERTUNG: 80
 - Beschreibung: qmake erzeugt ein Makefile für die Anwendung
 - Status: ausgeführt
 - Erfolgreich: **Ja**
-- Laufzeit: 0:00:00.246173
+- Laufzeit: 0:00:00.283912
 - Punkte: **16**
 - Return-Code / Fehlercode: `0`
 - Kommandozeile: `/usr/bin/qmake6 /repo/./project.pro`
@@ -109,7 +109,7 @@ BEWERTUNG: 80
 - Beschreibung: Das erzeugte Makefile für die Anwendung kann kompiliert werden.
 - Status: ausgeführt
 - Erfolgreich: **Ja**
-- Laufzeit: 0:00:08.797865
+- Laufzeit: 0:00:08.795673
 - Punkte: **16**
 - Return-Code / Fehlercode: `0`
 - Kommandozeile: `make`
@@ -127,26 +127,18 @@ g++ -c -pipe -O2 -std=gnu++1z -Wall -Wextra -fPIC -D_REENTRANT -DQT_NO_DEBUG -DQ
 g++ -Wl,-O1 -Wl,-rpath-link,/usr/lib/x86_64-linux-gnu -o gtfs_search  main.o mainwindow.o network.o moc_mainwindow.o   /usr/lib/x86_64-linux-gnu/libQt6Widgets.so /usr/lib/x86_64-linux-gnu/libQt6Gui.so /usr/lib/x86_64-linux-gnu/libGLX.so /usr/lib/x86_64-linux-gnu/libOpenGL.so /usr/lib/x86_64-linux-gnu/libQt6Core.so -lpthread -lGLX -lOpenGL
 ```
 
-##### Fehlerausgabe
-
-```../network.cpp: In member function 'std::string bht::CSVReader::getField(const std::string&)':
-../network.cpp:52:43: warning: comparison of integer expressions of different signedness: 'int' and 'std::vector<std::__cxx11::basic_string<char> >::size_type' {aka 'long unsigned int'} [-Wsign-compare]
-   52 |     if (it == headers.end() || it->second >= currentRow.size()) {
-      |                                ~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~
-```
-
 ## Test 9
 
 - Test: *Testfälle werden korrekt ausgeführt*
 - Beschreibung: Die Unit-Tests der Anwendung werden korrekt ausgeführt (max. Laufzeit 60 Sekunden).
 - Status: ausgeführt
-- Erfolgreich: **Nein**
-- Laufzeit: 0:00:00.218655
-- Punkte: **0**
-- Return-Code / Fehlercode: `1`
+- Erfolgreich: **Ja**
+- Laufzeit: 0:00:07.241014
+- Punkte: **20**
+- Return-Code / Fehlercode: `0`
 - Kommandozeile: `/repo/test_runner`
 ##### Testschritte
-- Rückgabe-Code ist `0`: fehlgeschlagen
+- Rückgabe-Code ist `0`: OK
 
 ##### Ausgabe
 
@@ -155,30 +147,13 @@ g++ -Wl,-O1 -Wl,-rpath-link,/usr/lib/x86_64-linux-gnu -o gtfs_search  main.o mai
 [----------] Global test environment set-up.
 [----------] 2 tests from Network
 [ RUN      ] Network.DataRead
-unknown file: Failure
-C++ exception with description "stoi" thrown in the test body.
-[  FAILED  ] Network.DataRead (1 ms)
+[       OK ] Network.DataRead (3537 ms)
 [ RUN      ] Network.Search
-unknown file: Failure
-C++ exception with description "stoi" thrown in the test body.
-[  FAILED  ] Network.Search (0 ms)
-[----------] 2 tests from Network (1 ms total)
+[       OK ] Network.Search (3489 ms)
+[----------] 2 tests from Network (7027 ms total)
 
 [----------] Global test environment tear-down
-[==========] 2 tests from 1 test suite ran. (1 ms total)
-[  PASSED  ] 0 tests.
-[  FAILED  ] 2 tests, listed below:
-[  FAILED  ] Network.DataRead
-[  FAILED  ] Network.Search
-
- 2 FAILED TESTS
+[==========] 2 tests from 1 test suite ran. (7027 ms total)
+[  PASSED  ] 2 tests.
 ```
-
-##### Hinweise zur Behebung des Fehlers
-
-- Kontrollieren Sie die Ausgabe der Tests.
-- Die Testfälle zeigen Ihnen das erwartete und Ihr Ergebnis an.
-- Sehen Sie keine Ausgabe und den Statuscode 139 stürzt Ihre Anwendung mit Speicherzugriffsfehler ab.
-- Die Tests dürfen nicht länger als 60 Sekunden dauern - testen Sie ggf. auf Endlosschleifen in Ihrer Anwendung.
-
 
