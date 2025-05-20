@@ -3,6 +3,7 @@
 #include <vector>
 #include <unordered_map>
 #include <fstream>  // Add this for std::ifstream
+#include <stdexcept> // For exception handling
 #include "types.h"
 
 namespace bht {
