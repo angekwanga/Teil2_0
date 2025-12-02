@@ -1,10 +1,3 @@
-# Übung 2
-
-Nachdem Sie die Daten zum Streckennetz im GTFS-Format verarbeiten können wollen wir diese in einer graphischen Anwendung den Nutzerinnen und Nutzern zur Verfügung stellen.
-Mit dieser Übung implementieren Sie eine eigene graphische Anwendung mit Qt, erstellen im GUI-Builder des Qt-Creator das Layout, verwenden Slots um auf Nutzereingaben zu reagieren und implementieren einen einfachen Such-Algorithmus um Haltestellen im Streckennetz zu finden.
-
-Sie benötigen dabei Ihre Ergebnisse aus Übung 1 um mit den Daten des Streckennetz weiter zu arbeiten und die vorhandenen Klassen zu erweitern.
-
 ## Haltestellen suchen
 
 Alle Haltestellen sind in der Datei `stops.txt` definiert und in Ihrer Klasse Network nach der Umsetzung aus Übung 1 im Attribut `stops` gespeichert.
@@ -77,5 +70,3 @@ Die folgenden Anforderungen werden in der Abgabe geprüft:
 1. Die Unit-Tests können ohne Fehler ausgeführt werden.
 1. Eine Plagiatsprüfung findet keine Treffer.
 
-## Freiwillig: Erweitern Sie die Oberfläche
-Mit Ihrer Oberfläche werden Sie auch in kommenden Übungen weiter arbeiten und diese stetig ausbauen. Erweitern Sie gerne Ihre Abgabe um zusätzliche Felder und probieren Sie andere GUI-Elemente aus.
